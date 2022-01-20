@@ -6,7 +6,7 @@
 
 $servername = "127.0.0.1";
 $username = "root";
-$password = "Hcbdag@635";
+$password = "";  // bij xampp geen ww nodig
 $dbname = "peopledb";
 
 try {
