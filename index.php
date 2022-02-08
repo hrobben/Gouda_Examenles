@@ -58,61 +58,42 @@ include('header.php');
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
-                            <th>Bestel_id</th>
-                            <th>Res_id</th>
-                            <th>Tafe;</th>
-                            <th>Datum</th>
-                            <th>Tijd</th>
-                            <th>Menu/drank</th>
-                            <th>Aantal</th>
-                            <th>prijs</th>
-                            <th>regel totaal</th>
-                            <th>Options</th>
+                            <th>Id</th>
+                            <th>FirstName</th>
+                            <th>Lastname</th>
+                            <th>MidName</th>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            <th>Comment</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <?php
-                        $query = 'SELECT * FROM peopledb.bestelling as b join peopledb.menuitem as m on m.menuitemcode=b.menuitemcode where b.reservering_id=10';
+                        $query = 'SELECT * FROM peopledb.people';
                         /*                    $result = mysqli_query($db, $query) or die (mysqli_error($db));
 
                                                 while ($row = mysqli_fetch_assoc($result)) {*/
                         $result = $conn->prepare($query);
                         $result->execute();
-                        $totaal = 0;
                         while ($row = $result->fetch(pdo::FETCH_ASSOC)) {
 
                             echo '<tr>';
-                            echo '<td>' . $row['bestelling_id'] . '</td>';
-                            echo '<td>' . $row['reservering_id'] . '</td>';
-                            echo '<td>' . $row['tafel'] . '</td>';
-                            echo '<td>' . $row['datum'] . '</td>';
-                            echo '<td>' . $row['tijd'] . '</td>';
-                            echo '<td>' . $row['menuitemnaam'] . '</td>';  // deze komt uit andere tabel.
-                            echo '<td>' . $row['aantal'] . '</td>';
-                            echo '<td>' . $row['prijs'] . '</td>';
-                            echo '<td>' . ($row['aantal']*$row['prijs']) .'</td>';
-                            $totaal += ($row['aantal']*$row['prijs']);
+                            echo '<td>' . $row['people_id'] . '</td>';
+                            echo '<td>' . $row['first_name'] . '</td>';
+                            echo '<td>' . $row['last_name'] . '</td>';
+                            echo '<td>' . $row['mid_name'] . '</td>';
+                            echo '<td>' . $row['address'] . '</td>';
+                            echo '<td>' . $row['contact'] . '</td>';  // deze komt uit andere tabel.
+                            echo '<td>' . $row['comment'] . '</td>';  // deze komt uit andere tabel.
                             echo '<td> <a type="button" class="btn btn-xs btn-info" href="searchfrm.php?action=edit & id=' . $row['people_id'] . '" > SEARCH </a> ';
                             echo ' <a  type="button" class="btn btn-xs btn-warning" href="edit.php?action=edit & id=' . $row['people_id'] . '"> EDIT </a> ';
                             echo ' <a  type="button" class="btn btn-xs btn-danger" href="del.php?type=people&delete & id=' . $row['people_id'] . '">DELETE </a> </td>';
                             echo '</tr> ';
                         }
 
-                        echo '
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Totale</td>
-                            <td>Schade</td>
-                            <td><?php echo $totaal; ?></td>';
                         ?>
-                            <td> TIKKIE????</td>
-                        </tr>
 
                         </tbody>
                     </table>
